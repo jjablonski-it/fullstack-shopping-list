@@ -31,9 +31,9 @@ export const Items = ({ onToggle, onDelete, items }) => {
     <ListGroup>
       {items.length > 0 ? (
         items.map(item => (
-          <ListGroupItem key={item.id} color={item.done ? "secondary" : ""}>
+          <ListGroupItem key={item._id} color={item.done ? "secondary" : ""}>
             {item.text}
-            {item.done ? buttonsDone(item.id) : button(item.id)}
+            {item.done ? buttonsDone(item._id) : button(item._id)}
           </ListGroupItem>
         ))
       ) : (

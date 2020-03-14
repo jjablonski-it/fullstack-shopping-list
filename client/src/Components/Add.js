@@ -10,13 +10,7 @@ export const Add = ({ onAdd }) => {
 
   const onSubmit = e => {
     e.preventDefault();
-    const newItem = {
-      text: input,
-      id: Math.floor(Math.random() * 1000),
-      done: false,
-      amount: 0
-    };
-    onAdd(newItem);
+    onAdd(input);
     setInput("");
   };
 

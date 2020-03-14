@@ -7,44 +7,48 @@ import { List } from "./Components/List";
 import { Add } from "./Components/Add";
 
 function App() {
-  const [items, setItems] = useState([
-    {
-      id: 1,
-      text: "Milk",
-      amount: 1,
-      done: true
-    },
-    {
-      id: 2,
-      text: "Bread",
-      amount: 2,
-      done: false
-    },
-    {
-      id: 3,
-      text: "Butter",
-      amount: 3,
-      done: true
-    }
-  ]);
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
-    // Api call will be here
+    axios
+      .get("/api/shoppingList")
+      .then(res => setItems(res.data))
+      .catch(err => console.log(err));
   }, []);
 
   const toggleItem = id => {
     const tempItems = items;
-    const cIndex = tempItems.findIndex(item => item.id === id);
+    const cIndex = tempItems.findIndex(item => item._id === id);
     tempItems[cIndex].done = !tempItems[cIndex].done;
-    setItems([...items]);
+
+    axios
+      .patch(`/api/shoppingList/${id}`)
+      .then(res => {
+        setItems([...items]);
+      })
+      .catch(err => console.log(err));
   };
 
   const deleteItem = id => {
-    setItems(items.filter(item => item.id !== id));
+    axios
+      .delete(`/api/shoppingList/${id}`)
+      .then(res => {
+        setItems(items.filter(item => item._id !== id));
+      })
+      .catch(err => console.log(err));
   };
 
-  const addItem = item => {
-    setItems([...items, item]);
+  const addItem = text => {
+    const config = {
+      headers: { "Content-Type": "application/json" }
+    };
+
+    console.log(config);
+
+    axios
+      .post("/api/shoppingList", { text }, config)
+      .then(item => setItems([...items, item.data]))
+      .catch(err => console.log(err));
   };
 
   return (
