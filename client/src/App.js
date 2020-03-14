@@ -43,8 +43,6 @@ function App() {
       headers: { "Content-Type": "application/json" }
     };
 
-    console.log(config);
-
     axios
       .post("/api/shoppingList", { text }, config)
       .then(item => setItems([...items, item.data]))

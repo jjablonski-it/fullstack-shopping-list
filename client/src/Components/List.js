@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { ListGroup, ListGroupItem, Button } from "reactstrap";
+import { ListGroup } from "reactstrap";
 
 // Components
 import { Items } from "./Items";
