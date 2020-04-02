@@ -37,7 +37,7 @@ export const Items = ({ onToggle, onDelete, items }) => {
             key={item._id}
             in={true}
             classNames="item"
-            timeout={300}
+            timeout={{ enter: 300, exit: 0 }}
             unmountOnExit={true}
           >
             <ListGroupItem color={item.done ? "secondary" : ""}>

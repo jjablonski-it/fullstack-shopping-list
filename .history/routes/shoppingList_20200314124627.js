@@ -33,6 +33,7 @@ router.patch("/:id", (req, res) => {
   if (id)
     Item.findById(id)
       .then(item => {
+        console.log(item);
         const updatedItem = new Item(item);
         updatedItem.done = !item.done;
         updatedItem

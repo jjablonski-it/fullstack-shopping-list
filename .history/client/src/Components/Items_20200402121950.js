@@ -1,7 +1,6 @@
 import React from "react";
 import { ListGroupItem, ListGroup, Button } from "reactstrap";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import "../styles.css";
 
 export const Items = ({ onToggle, onDelete, items }) => {
   const button = id => (
@@ -31,22 +30,20 @@ export const Items = ({ onToggle, onDelete, items }) => {
 
   return (
     <ListGroup>
-      <TransitionGroup appear={true}>
-        {items.map(item => (
-          <CSSTransition
-            key={item._id}
-            in={true}
-            classNames="item"
-            timeout={300}
-            unmountOnExit={true}
-          >
-            <ListGroupItem color={item.done ? "secondary" : ""}>
-              {item.text}
-              {item.done ? buttonsDone(item._id) : button(item._id)}
-            </ListGroupItem>
-          </CSSTransition>
-        ))}
-      </TransitionGroup>
+      {items.length > 0 ? (
+        items.map(item => (
+          <TransitionGroup>
+            <CSSTransition key={item._id} classNames="item" timeout={500}>
+              <ListGroupItem color={item.done ? "secondary" : ""}>
+                {item.text}
+                {item.done ? buttonsDone(item._id) : button(item._id)}
+              </ListGroupItem>
+            </CSSTransition>
+          </TransitionGroup>
+        ))
+      ) : (
+        <span>Empty</span>
+      )}
     </ListGroup>
   );
 };
